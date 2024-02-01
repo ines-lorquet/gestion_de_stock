@@ -1,11 +1,13 @@
 import pygame
-from fichier.global_def import Global
+from global_def import Global
+from product import Product
 import pygame, time, sys
 
 class Menu(Global): 
 
     def __init__(self): 
         Global.__init__(self)
+        self.product = Product()
         self.running = True
 
     def menu_run(self):
@@ -85,8 +87,7 @@ class Menu(Global):
                         rect = option_rects[i]
                         if rect.collidepoint(mouse_pos):
                             if item == "PRODUCT":
-                                pygame.quit()
-                                sys.exit()
+                                self.product.product_run()
                             elif item == "EDIT":
                                 pygame.quit()
                                 sys.exit()
@@ -124,3 +125,56 @@ class Menu(Global):
 
 test_menu = Menu()
 test_menu.menu_run()
+
+
+
+# CREATE DATABASE store;
+# SHOW Databases;
+
+# USE store;
+
+# CREATE TABLE product(
+#     id INT PRIMARY KEY AUTO_INCREMENT,
+#     name VARCHAR(255),
+#     description TEXT,
+#     price INT,
+#     quantity INT,
+#     id_category INT 
+#     );
+
+# SHOW COLUMNS
+# FROM product;
+
+# INSERT INTO product(name,description,price,quantity,id_category) VALUES
+# ('Maki-sushi', "Rouleau de riz farci enroulés d'algue nori séchée", 8, 30,1),
+# ('Sashimi',"Tranches de poisson cru.", 6, 50,1),
+# ('Uramaki',"Momposé de saumon et d'avocat", 8, 40,1),
+# ('Temaki-sushi',"Riz, fruits de mer et poissons cuits enfermés dans un cône", 20, 10,1),
+# ('Sauce Soja', 'Mélange de soja et de blé', 2, 100, 1);
+
+# SELECT *
+# FROM product;
+
+# CREATE TABLE category (
+#     id INT PRIMARY KEY AUTO_INCREMENT,
+#     name VARCHAR(255)
+#     ); 
+
+# SHOW COLUMNS
+# FROM category;
+
+# INSERT INTO category(name) VALUES
+# ('Sushi'),
+# ('Sauce')
+# ; 
+
+# SELECT *
+# FROM category; 
+
+# SELECT employe.nom, employe.prenom, employe.salaire, service.nom as service
+# FROM employe
+# JOIN service ON employe.id_service = service.id
+
+# UPDATE product 
+# SET description = "Riz, fruits de mer et poissons cuits dans un cone"
+# WHERE id = 4;
