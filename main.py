@@ -1,14 +1,17 @@
 import pygame
-from global_def import Global
-from product import Product
-import pygame, time, sys
+import sys
+from fichier.global_def import Global
+from fichier.add import Add
+from fichier.product import Product
 
 class Menu(Global): 
 
     def __init__(self): 
         Global.__init__(self)
         self.product = Product()
+        self.add = Add()
         self.running = True
+        self.add_time = 0
 
     def menu_run(self):
         self.options_menu()       
@@ -23,7 +26,7 @@ class Menu(Global):
                 self.text_c5("product",self.black,350,285)
             elif pos==(470 - 100, 255 + 1 * 65, 220, 50):
                 self.image("baguette",r"img/menu2.png",90,119,200,255)
-                self.text_c5("edit",self.black,375,350)
+                self.text_c5("add",self.black,375,350)
             elif pos==(467- 100, 250 + 2 * 65, 220, 50):
                 self.image("baguette",r"img/menu2.png",90,119,200,320)
                 self.text_c5("quit",self.black,370,415)
@@ -58,7 +61,7 @@ class Menu(Global):
         option_rects = [
             pygame.Rect(self.screen_width // 2 - 100, 250 + i * 65, 220, 50) for i in range(4)
         ]
-        option_texts = ["PRODUCT", "EDIT", "QUIT"]
+        option_texts = ["PRODUCT", "ADD", "QUIT"]
         image_x = -400 
         while self.running:
             self.screen.blit(img_back, (0, 0))     
@@ -69,7 +72,7 @@ class Menu(Global):
             for i, (rect, text) in enumerate(zip(option_rects, option_texts)):
                 if text == "PRODUCT":
                     position = (430 - 100, 255 + i * 65, 220, 50)
-                elif text == "EDIT":
+                elif text == "ADD":
                     position = (470 - 100, 255 + i * 65, 220, 50)
                 else:
                     position = (467- 100, 250 + i * 65, 220, 50)
@@ -87,10 +90,11 @@ class Menu(Global):
                         rect = option_rects[i]
                         if rect.collidepoint(mouse_pos):
                             if item == "PRODUCT":
+                                self.product.product_running = True
                                 self.product.product_run()
-                            elif item == "EDIT":
-                                pygame.quit()
-                                sys.exit()
+                            elif item == "ADD":
+                                self.add.add_running = True
+                                self.add.run()
                             elif item == "QUIT":
                                 pygame.quit()
                                 sys.exit()
@@ -176,5 +180,5 @@ test_menu.menu_run()
 # JOIN service ON employe.id_service = service.id
 
 # UPDATE product 
-# SET description = "Riz, fruits de mer et poissons cuits dans un cone"
-# WHERE id = 4;
+# SET id_category = 2
+# WHERE id = 5;

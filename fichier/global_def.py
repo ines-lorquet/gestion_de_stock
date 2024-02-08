@@ -56,19 +56,17 @@ class Global:
         text_surface = self.police_c5.render(text, True, color)
         self.screen.blit(text_surface, (x, y))
 
-    def image(self,name,path,a,b,x,y):
-        name = pygame.image.load(path)
-        name = name.convert_alpha()
-        name = pygame.transform.scale(name,(a,b))        
-        self.screen.blit(name,(x,y))
-
-    def img_back(self,name,path):
-        name =  pygame.image.load(path).convert_alpha()
-        L_name, H_name = name.get_size()
-        name = pygame.transform.scale(name, (L_name,H_name))
-        x =(self.screen_width - L_name)//2
-        y = (self.screen_height - H_name)//2
-        self.screen.blit(name, (x, y))
+    # def image(self,name,path,a,b,x,y):
+    #     name = pygame.image.load(path)
+    #     name = name.convert_alpha()
+    #     name = pygame.transform.scale(name,(a,b))        
+    #     self.screen.blit(name,(x,y))
+    def image(self, name, path, width, height, x, y):
+        image = pygame.image.load(path)
+        image = pygame.transform.scale(image, (width, height))
+        rect = image.get_rect(topleft=(x, y))
+        self.screen.blit(image, rect)
+        return rect
 
     def text_center2(self,text,color,rect,nb):
         text_surface = self.police_c2.render(text, True, color)
@@ -82,64 +80,34 @@ class Global:
         text_rect.center = (rect.centerx, rect.centery - nb)
         self.screen.blit(text_surface, text_rect)
         
-# def rectangle   
-             
-        # Rectangle 
+    def text_center3(self,text,color,rect,nb1,nb2):
+        text_surface = self.police_c1.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.center = (rect.centerx - nb1, rect.centery - nb2)
+        self.screen.blit(text_surface, text_rect)
+
+    def texte(self, texte_size, texte_content, color, x, y):
+        pygame.font.init()   # modifier police
+        Texte = pygame.font.Font("Neug Asia.ttf", texte_size).render(texte_content, True, color)
+        Texte_rect = Texte.get_rect(center=(x, y))
+        self.screen.blit(Texte, Texte_rect)
+        
     def rect(self,nom, x1,y1,x2,y2):   
         nom = pygame.Rect(x1,y1,x2,y2)
-
-              # Rectangle Radius
-    def rect_radius(self,radius,color,x1,y1,x2,y2):
-        r = radius
-        pygame.draw.rect(self.screen,color,(x1,y1,x2,y2),border_radius = r)
-
-
-"""
-CREATE DATABASE LaPlateforme2;
-
-USE LaPlateforme2;
-
-CREATE TABLE product (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255),
-    description TEXT,
-    price INT,
-    quantity INT,
-    id_category INT
-    );
     
-DESCRIBE product;
+    def rect2(self,surface, color, x1, y1, x2, y2):   
+        rect = pygame.Rect(x1,y1,x2,y2)
+        pygame.draw.rect(surface, color, rect)
+        return rect
+    #           # Rectangle Radius
+    # def rect_radius(self,radius,color,x1,y1,x2,y2):
+    #     r = radius
+    #     pygame.draw.rect(self.screen,color,(x1,y1,x2,y2),border_radius = r)
 
-CREATE TABLE category (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255)
-    );
-    
-DESCRIBE category;
-
-INSERT INTO product(name,description,price,quantity,id_category) VALUES
-('Jambon','Le Jambon Fumé, cuisse entière du cochon.', 3,100,1),
-('Chorizo','Chorizo sec de boeuf et de porc fait maison', 4, 50, 1),
-('Saucisson','Saucisson sec enrobé aux herbes', 4, 120, 1),
-('Bacon','Bacon Fumé au bois de hêtre', 2, 200, 1),
-('Salami','Salami de volaille à la graisse végétale', 3, 20, 1),
-('Ice Tea',' Ice Tea saveur pêche', 2, 300, 2);
-
-SELECT * FROM product;
-
-UPDATE product
-SET description = 'Chorizo sec de boeuf et de porc fait maison'
-WHERE id = 2;
-
-INSERT INTO category (name) VALUES
-('Charcuterie'),
-('Boisson'),
-('Fromage');
-
-SELECT * FROM category;
-
-SELECT employe.nom, employe.prenom, employe.salaire, service.nom as service
-FROM employe
-JOIN service ON employe.id_service = service.id
-
-"""
+    # def img_back(self,name,path):
+    #     name =  pygame.image.load(path).convert_alpha()
+    #     L_name, H_name = name.get_size()
+    #     name = pygame.transform.scale(name, (L_name,H_name))
+    #     x =(self.screen_width - L_name)//2
+    #     y = (self.screen_height - H_name)//2
+    #     self.screen.blit(name, (x, y))
