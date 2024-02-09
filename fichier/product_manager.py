@@ -60,7 +60,7 @@ class Product_Manager:
         self.connection.commit()
 
     def modify_product(self, id, nouveau_attribut_1, nouveau_attribut_2):
-        sql = "UPDATE product SET attribut_1 = %s, attribut_2 = %s WHERE id = %s"
+        sql = "UPDATE product SET price = %s, quantity = %s WHERE id = %s"
         values = (nouveau_attribut_1, nouveau_attribut_2, id)
         self.cursor.execute(sql, values)
         self.connection.commit()
