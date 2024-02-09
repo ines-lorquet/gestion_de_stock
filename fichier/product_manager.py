@@ -59,10 +59,10 @@ class Product_Manager:
         self.cursor.execute(sql, values)
         self.connection.commit()
 
-    def modify_product(self, product_id, new_product):
-        set_clause = ", ".join([f"{key} = '{value}'" for key, value in new_product.items()])
-        sql = f"UPDATE product SET {set_clause} WHERE id = %s"
-        self.cursor.execute(sql, (product_id,))
+    def modify_product(self, id, nouveau_attribut_1, nouveau_attribut_2):
+        sql = "UPDATE product SET attribut_1 = %s, attribut_2 = %s WHERE id = %s"
+        values = (nouveau_attribut_1, nouveau_attribut_2, id)
+        self.cursor.execute(sql, values)
         self.connection.commit()
 
     def display_product(self):
