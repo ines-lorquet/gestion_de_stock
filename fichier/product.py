@@ -22,7 +22,7 @@ class Product(Global):
         self.rect_height = 300
         self.rect_speed = 300
         self.rectangles_position = 200
-        self.img_back = pygame.image.load(r"img/menu1.jpg")
+        self.img_back = pygame.image.load(r"img/menu1.png")
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.product_running = True
         self.new_quantity = ""

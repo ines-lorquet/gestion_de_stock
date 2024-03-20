@@ -48,7 +48,7 @@ class Menu(Global):
         
     def options_menu(self):
         self.running = True
-        img_back = pygame.image.load(r"img/menu1.jpg").convert()
+        img_back = pygame.image.load(r"img/menu1.png").convert()
         tour = pygame.time.Clock()
         image_x = -400 
         image_x2 = image_x-800
